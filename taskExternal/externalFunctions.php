@@ -1,20 +1,26 @@
 <?php
-function calcNumber(int $number, int $calcnumber,bool $calc):int {
+function calcNumber(int $number , int $calcNumber , bool $calc = true) : int 
+{
     if($calc){
-        return  $number + $calcnumber;
+        return $number + $calcNumber;
     } else {
-        return $number - $calcnumber;
+        return $number - $calcNumber;
     }
 }
-function pownumber(int $number,bool $calc):int {
+
+function powNumber(int $number ,bool $calc = false):int
+{
     if($calc){
-        return  $number * $number * $number;
+        return $number * $number * $number;
     } else {
         return $number * $number;
     }
-}
+
+};
+
 // 各科目の平均点
 $averageScore = [
+    
     'nationalLanguage' => 63,
     'math' => 67,
     'society' => 71,
@@ -38,12 +44,21 @@ $AScore = [
     'english' => 80,
 ];
 
-function calcAverage(array $Score):float
+function calcAverage(array $score):float 
 {
     $totalScore = 0;
-    foreach($Score as $value){
+    foreach($score as $value){
         $totalScore += $value;
     }
-    return round($totalScore / count($Score));
+    return round($totalScore / count($score));
+}
 
+//点数を
+function differenceScore(array $score, array $averageScore):array
+{
+    $differenceArray = [];
+    foreach ($score as $key => $value) {
+        $differenceArray[$key] = $value - $averageScore[$key];
+    }
+    return $differenceArray;
 }

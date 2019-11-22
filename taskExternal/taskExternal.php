@@ -1,41 +1,46 @@
 <?php
-/**
- * 表示を行う
- * 
- * @param  string $string
- * @return null
- */
-function display(string $string)
-{
-    echo ('<p>' . $string . '</p>');
-}
+require_once("externalFunctions.php");
+    /**
+     * 表示を行う
+     * 
+     * @param  string $string
+     * @return null
+     */
+    function display(string $string)
+    {
+        echo ('<p>' . $string . '</p>');
+    }
+$number = 84;
+$calcNumber = 37;
 
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>taskExternal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>taskExternal</title>
 </head>
 <body>
-display('回答を<p>タグで囲み、回答を出力してください。');
-display('回答例: 1 + 1 = ' . (string)(1 + 1) . 'です。');
+    <p>
+        <?php echo("$number + $calcNumber = ". calcNumber($number,$calcNumber));?>
+        <?php echo("$number - $calcNumber = ". calcNumber($number,$calcNumber,false));?>
+        <?php echo("$number の2乗は". powNumber($number));?>
+        <?php echo("$number の3乗は". powNumber($calcNumber , true));?>
+        <?php echo("全科目の平均点は". calcAverage($averageScore) . "点です。");?>
+        <?php echo("A君の平均点は". calcAverage($AScore) . "点です。");?>
+        <?php 
+            foreach (differenceScore($AScore, $averageScore) as $key => $value) {
+            if ($value > 0) {
+                display($subjectTitle[$key] . "は、平均点より" . abs($value) . "点高いです。");
+            } elseif ($value < 0) {
+                display($subjectTitle[$key] . "は、平均点より" . abs($value) . "点低いです。");
+            } else {
+                display($subjectTitle[$key] . "は、平均点と同じです。" );
+            }
+            }
+        ?>
+        </p>
 </body>
 </html>
-```
-<?php 
-// 課題１
-$num1 = 84;
-$num2 = 37;
-$flag = true;
-$flag2 = false;
-
-require_once("externalFunctions.php"); 
-    echo nl2br($num1 ."+". $num2 ."=".calcNumber($num1,$num2,$flag)."\n");
-    echo nl2br($num1 ."-". $num2 ."=".calcNumber($num1,$num2,$flag2)."\n");
-    echo nl2br($num1."の2乗は".pownumber($num1,$flag2)."\n");
-    echo nl2br($num2."の3乗は".pownumber($num2,$flag)."\n");
-    echo nl2br("A君の平均点は".$totalScore."です。" . "\n" );
-?>
